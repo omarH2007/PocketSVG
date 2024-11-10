@@ -362,6 +362,9 @@ NSDictionary *svgParser::readAttributes()
                     }
                 } else if([transformCmd isEqualToString:@"translate"] && transformOperands.size() >= 1) {
                     float tx = transformOperands[0];
+                    if (tx < 0)
+                        if (attrs[@"clip-path"])
+                        tx = 0;
                     float ty = 0;
                     if (transformOperands.size() >= 2)
                         ty = transformOperands[1];
